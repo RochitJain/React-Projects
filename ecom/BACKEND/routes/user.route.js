@@ -1,13 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose');
 
-const userController = require('../controller/user.controller')
+const userController = require('../controller/user.controller');
+const productController = require('../controller/product.controller')
 
 const router = express.Router();
 
-router.get('/start',userController.getUser)
-router.post('/start',userController.addUser);
-router.route('/start').delete();
+router.get('/admin-login',userController.loginCheckAdmin)
+router.post('/admin-register',userController.registerAdmin)
+router.get('/user-login',userController.loginCheckUser);
+router.post('/user-register', userController.registerUser);
+router.post('/', )
 
 module.exports = router;
 

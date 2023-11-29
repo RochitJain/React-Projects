@@ -3,7 +3,8 @@ const userModel = require('../schemas/user.model')
 exports.getUser= async function(query) {
     try{
 
-        var users= await userModel.find(query).lean().exec();
+        var users= await userModel.findOne(query).lean().exec();
+        console.log(users)
         return users;
 
     }catch{

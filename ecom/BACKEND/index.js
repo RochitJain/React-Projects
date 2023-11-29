@@ -37,6 +37,7 @@
 
 const mongoose = require('mongoose');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 const userRoute = require('./routes/user.route');
@@ -46,6 +47,7 @@ const productRoute = require('./routes/products.route');
 const source = process.env.DB_URL
 
 app.use(express.json());
+app.use(cors())
 
 mongoose.connect(source, {
     useNewUrlParser: true,
@@ -59,9 +61,9 @@ connection.once('open', () => {
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>{
-    console.log(`Successfully served on port: ${PORT}.`);
+    console.log(`Successfully served on port :: ${PORT}.`);
 })
 
 app.use('/user',userRoute);
-app.use('/product',productRoute)
+// app.use('/product',productRoute)
 

@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "mongoose": "^8.0.1",
     "next": "^14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-fontawesome": "^1.7.1"
   },
   "devDependencies": {
     "@types/node": "^20",
