@@ -6,7 +6,7 @@ const productController = require('../controller/product.controller')
 
 const router = express.Router();
 
-router.get('/admin-login',userController.loginCheckAdmin)
+router.post('/admin-login',userController.loginCheckAdmin)
 router.post('/admin-register',userController.registerAdmin)
 router.get('/user-login',userController.loginCheckUser);
 router.post('/user-register', userController.registerUser);

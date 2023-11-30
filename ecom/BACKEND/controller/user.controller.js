@@ -2,28 +2,30 @@ const mongoose = require('mongoose');
 const userService = require('../service/user.service');
 const auth = require('../middleware/auth');
 const User = require('../schemas/user.model');
-const res = 
 
 exports.loginCheckAdmin = async function (req,res,next) {
     try{
-        const [email, password] = req.body;
+        console.log(req.body);
+        const {email, password} = req.body;
         const user = await userService.getUser({email});
-        if(!user) return res.send("Not present");
-
+        // console.log(user);
+        if(!user) return res.json({message:"User Not present"});
+        // console.log(user);
         const isMatching = await auth.isPasswordMatching(password, user.password);
-        if(!isMatching) return res.send('Not matching');
-
+        if(!isMatching) return res.json({message:'Password not matching'});
+        // console.log(user);
         if(user.token) return (
         user.token
         )
+        // console.log(user);
 
         const token = await auth.tokenGenerate(user);
         
         
-        res.send({message: 'Login', token});
+        res.json({message: 'Login', token,name: user.name});
 
     }catch(e){
-        log(e)
+       res.json(e)
     }
 }
 
@@ -34,23 +36,28 @@ exports.loginCheckUser = async function (req,res) {
 exports.registerAdmin = async function (req,res,next) {
 
     try {
-        console.log(req.body)
-    const {name, email, password} = req.body;
 
+    const {name, email, password} = req.body;
+    //console.log(req.body);
     const hashedPassword = await auth.passwordHashing(password);
     
-    User.create({
+    const user = await User.create({
         name,
         email,
         password: hashedPassword,
         role: 'admin'
     });
 
-    res.send("Registered");
+    //console.log(user);
+    //console.log(token)
+    // const isMatching = await auth.tokenVerify(token,user._id);
+    //console.log(isMatching);
+    // console.log(JSON.stringify(user));
+    res.json({message:'User Registered'});
 
     }catch(e){
         console.log(e);
-        res.send(e);
+        res.json(e);
     }
 }
 

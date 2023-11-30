@@ -12,16 +12,29 @@ export default function Login() {
     const submitAdminLogin = async (e: any) => {
         e.preventDefault();
         const data = { email, password }
-        const response = await fetch('http://localhost:4001/user/start', {
+        await fetch('http://localhost:4002/user/admin-login', {
             mode: 'cors',
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(res => res.json()).then(data => console.log(data))
-
+        }).then(res=>res.json()).then(res=>{
+            if(res.message=== "Login") {
+                localStorage.setItem('token',res.token);
+                localStorage.setItem('name',res.name);
+                localStorage.setItem('email',res.email);
+                window.location.replace('/admin/home');
+            } else if(res.message === "User Not present") {
+                window.alert(res.message);
+            } else if(res.message === "Password not matching") {
+                window.alert(res.message);
+            }
+        })
     }
+
+
+
     return (
         <>
             <div className="flex justify-center items-center h-screen w-screen bg-white">

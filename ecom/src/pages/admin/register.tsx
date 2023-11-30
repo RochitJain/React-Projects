@@ -1,8 +1,12 @@
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { useState } from "react";
 import { faAddressCard } from '@fortawesome/fontawesome-free-solid';
+import {useRouter, } from 'next/navigation';
+import ContactUs from '../contactUs'
 
 export default function Register() {
+
+    const router = useRouter();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,7 +23,17 @@ export default function Register() {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(resp=> console.log(resp))
+        })
+        .then(resp=> resp.json()).then(res=>{
+            if(res.message==="User Registered"){
+                window.alert(res.message)
+                window.location.replace('/admin/login')
+            }else if(res.errors){
+                window.alert(res.message)
+            }
+        })
+
+      
 
 
 

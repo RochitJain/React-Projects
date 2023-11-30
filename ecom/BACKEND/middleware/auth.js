@@ -1,16 +1,22 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { ObjectId } = require('mongodb');
 
 
-exports.tokenGenerate = async function (User){
+exports.tokenGenerate = async function (_id){
 
-
-    const token = jwt.sign({name: User.email},process.env.SECRET_KEY,
+    // console.log(_id);
+    const token = jwt.sign({_id},process.env.SECRET_KEY,
         {
         expiresIn: '10s'
     })
 
     return token;
+}
+
+exports.tokenVerify = async function (token,_id) {
+    const isMatching = jwt.verify(token,process.env.SECRET_KEY);
+    return _id.toString() === isMatching._id ? true : false
 }
 
 exports.isPasswordMatching = async function (password,hash) {
