@@ -1,27 +1,33 @@
 const mongoose = require('mongoose');
-const userService = require('../service/user.service')
+const productService = require('../service/product.service')
 
 
-exports.getUser = async function (req,res,next) {
+exports.getProducts = async function (req,res) {
+
     try{
-    const users = await userService.getUser(req.body)
-    .then(response=>{
-        res.send(response);
+        if(req.user.role==='admin') {
+        await productService.getProducts(req.body)
+        .then(response=>{
+            res.send(response);
     })
-    }catch{
-
+}
+    }catch(e) {
+        res.json({message: e.message})
     }
 }
 
-exports.addUser = async function (req,res,next) {
+exports.addProduct = async function (req,res) {
+
     try{
-    await userService.addUser(req.body)
-    .then(response=>{
-        res.send(response)
-    })
-    // console.log(users);
-
-    }catch{
-
+        if(req.user.role==='admin') {
+        await productService.addProduct(req.body)
+        .then(response=>{
+            res.send(response)
+        })
+    }else {
+        res.send({message: 'User not authorized'});
+    }
+    }catch(e){
+        res.send({message: e.message});
     }
 }

@@ -8,7 +8,7 @@ exports.tokenGenerate = async function (_id){
     // console.log(_id);
     const token = jwt.sign({_id},process.env.SECRET_KEY,
         {
-        expiresIn: '10s'
+        expiresIn: '3d'
     })
 
     return token;
@@ -16,7 +16,19 @@ exports.tokenGenerate = async function (_id){
 
 exports.tokenVerify = async function (token,_id) {
     const isMatching = jwt.verify(token,process.env.SECRET_KEY);
-    return _id.toString() === isMatching._id ? true : false
+    return {_id:isMatching._id, istrue: _id.toString() === isMatching._id ? true : false}
+}
+
+exports.auth = async function (req, res, next) {
+    try{const tokenString = req.headers['authorization'].split(' ')[1];
+    // console.log(tokenString);
+
+    const isMatching = jwt.verify(tokenString,process.env.SECRET_KEY);
+    req.user = isMatching._id;
+    next();
+    }catch {
+
+}
 }
 
 exports.isPasswordMatching = async function (password,hash) {

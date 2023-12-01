@@ -1,6 +1,6 @@
 import { log } from "console";
 import { useState } from "react";
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 export default function Login() {
 
@@ -25,6 +25,7 @@ export default function Login() {
                 localStorage.setItem('name',res.name);
                 localStorage.setItem('email',res.email);
                 window.location.replace('/admin/home');
+                console.log(res);
             } else if(res.message === "User Not present") {
                 window.alert(res.message);
             } else if(res.message === "Password not matching") {
@@ -41,7 +42,7 @@ export default function Login() {
                 <div className="flex bg-teal-500 shadow-red-600 shadow-2xl justify-center p-4 rounded-3xl h-3/6 w-2/5">
                     
                     <form onSubmit={submitAdminLogin} className= "p-5 w-3/5">
-                        <h1 className="text-black text-3xl font-serif font-extralight p-4 mb-4"><FontAwesomeIcon icon= "fa-solid fa-user" beatFade/>Login</h1>
+                        <h1 className="text-black text-3xl font-serif font-extralight p-4 mb-4">Login</h1>
                         <label className="block text-base"> Email</label>
                         <input type="text" className="text-black w-full h-9 mt-3 rounded-lg" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                         <label className="block text-base mt-4">Password</label>

@@ -1,6 +1,6 @@
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { useState } from "react";
-import { faAddressCard } from '@fortawesome/fontawesome-free-solid';
+// import { faAddressCard } from '@fortawesome/fontawesome-free-solid';
 import {useRouter, } from 'next/navigation';
 import ContactUs from '../contactUs'
 
@@ -47,7 +47,7 @@ export default function Register() {
                 <div className="flex bg-teal-500 shadow-red-600 shadow-2xl justify-center p-4 rounded-3xl h-5/6 w-2/5">
                     
                     <form className= "p-5 w-3/5" onSubmit={registerUser}>
-                        <h1 className="text-black text-3xl font-serif font-extralight p-4 mb-4"><FontAwesomeIcon icon={faAddressCard} size="lg" className='mr-3'/>Register</h1>
+                        <h1 className="text-black text-3xl font-serif font-extralight p-4 mb-4">Register</h1>
                         <label className="block text-base"> Name</label>
                         <input type="text" className="text-black w-full h-9 mt-3 rounded-lg border-2 border-rose-300" value={name} onChange={(e) => setName(e.target.value)}></input>
                         <label className="block text-base mt-4"> Email</label>

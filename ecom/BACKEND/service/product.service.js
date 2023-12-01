@@ -1,22 +1,25 @@
-const userModel = require('../schemas/product.model')
+const productModel = require('../schemas/product.model');
 
-exports.getUser= async function(query) {
+
+exports.getProducts = async function(query) {
     try{
 
-        var users= await userModel.find(query).lean().exec();
-        return users;
+        var products = await productModel.find(query).lean().exec();
+        return products;
 
     }catch{
 
     }
 }
 
-exports.addUser= async function(query) {
+exports.addProduct = async function(query) {
     try{
-        var users= new userModel(query);
-        users.save();
+        var users= new productModel(query);
+        await users.save()
         return users;
-    }catch{
-
+    }catch(e){
+        if(e.code===11000) {
+            return {message: 'Unique OrderId only'}
+        }
     }
 }

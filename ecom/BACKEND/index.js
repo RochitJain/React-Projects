@@ -65,5 +65,5 @@ app.listen(PORT, ()=>{
 })
 
 app.use('/user',userRoute);
-// app.use('/product',productRoute)
+ app.use('/product',productRoute)
 

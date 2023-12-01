@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const userService = require('../service/user.service');
-const auth = require('../middleware/auth');
+const authourization = require('../middleware/auth');
 const User = require('../schemas/user.model');
 
 exports.loginCheckAdmin = async function (req,res,next) {
@@ -11,7 +11,7 @@ exports.loginCheckAdmin = async function (req,res,next) {
         // console.log(user);
         if(!user) return res.json({message:"User Not present"});
         // console.log(user);
-        const isMatching = await auth.isPasswordMatching(password, user.password);
+        const isMatching = await authourization.isPasswordMatching(password, user.password);
         if(!isMatching) return res.json({message:'Password not matching'});
         // console.log(user);
         if(user.token) return (
@@ -19,7 +19,7 @@ exports.loginCheckAdmin = async function (req,res,next) {
         )
         // console.log(user);
 
-        const token = await auth.tokenGenerate(user);
+        const token = await authourization.tokenGenerate(user);
         
         
         res.json({message: 'Login', token,name: user.name});
@@ -39,7 +39,7 @@ exports.registerAdmin = async function (req,res,next) {
 
     const {name, email, password} = req.body;
     //console.log(req.body);
-    const hashedPassword = await auth.passwordHashing(password);
+    const hashedPassword = await authourization.passwordHashing(password);
     
     const user = await User.create({
         name,
