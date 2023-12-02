@@ -8,7 +8,7 @@ exports.getProducts = async function (req,res) {
         if(req.user.role==='admin') {
         await productService.getProducts(req.body)
         .then(response=>{
-            res.send(response);
+            res.json(response);
     })
 }
     }catch(e) {
@@ -22,12 +22,12 @@ exports.addProduct = async function (req,res) {
         if(req.user.role==='admin') {
         await productService.addProduct(req.body)
         .then(response=>{
-            res.send(response)
+            res.json(response)
         })
     }else {
-        res.send({message: 'User not authorized'});
+        res.json({message: 'User not authorized'});
     }
     }catch(e){
-        res.send({message: e.message});
+        res.json({message: e.message});
     }
 }

@@ -13,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "mongoose": "^8.0.1",
     "next": "^14.0.1",
+    "random-string-alphanumeric-generator": "^0.12.2",
     "react": "^18",
     "react-dom": "^18",
     "react-fontawesome": "^1.7.1"

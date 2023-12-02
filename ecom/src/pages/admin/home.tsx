@@ -22,7 +22,7 @@ export default function Home() {
         productData.map(data =>{
             return(
                <tr>
-                <td>1</td>
+                <td>data.length()</td>
                 <td>{data['name']}</td>
                 <td>{data['price']}</td>
                 <td>{data['quantity']}</td>
@@ -31,6 +31,7 @@ export default function Home() {
             )
         })
     
+
 
 
 
@@ -52,6 +53,7 @@ export default function Home() {
             {tableData}
         </tbody>
     </table>
+    <button className="p-4 bg-teal-800 rounded-2xl mt-4 ml-16" onClick={()=>window.location.replace('/admin/addProduct')}>Add Product</button> 
     </div>
     </div>
     </>)

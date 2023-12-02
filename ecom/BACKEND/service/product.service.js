@@ -16,8 +16,9 @@ exports.addProduct = async function(query) {
     try{
         var users= new productModel(query);
         await users.save()
-        return users;
+        return {};
     }catch(e){
+        console.log(e)
         if(e.code===11000) {
             return {message: 'Unique OrderId only'}
         }

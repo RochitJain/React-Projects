@@ -6,8 +6,7 @@ import ContactUs from '../contactUs'
 
 export default function Register() {
 
-    const router = useRouter();
-
+    
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
