@@ -24,3 +24,28 @@ exports.addProduct = async function(query) {
         }
     }
 }
+
+exports.updateProduct = async function(query) {
+    try{
+        var orderId = query.orderId;
+        await productModel.findOneAndUpdate({orderId},query)
+        .then(res=>res.json(res))
+        .catch(e=> res.json(e))
+
+    } catch(e) {
+
+    }
+}
+
+exports.deleteRecord = async function(orderId) {
+
+    try{
+        //console.log(orderId)
+        await productModel.deleteOne({orderId})
+        .then(res=>res.json(res))
+        .catch(e=> res.json(e))
+
+    } catch(e) {
+
+    }
+}

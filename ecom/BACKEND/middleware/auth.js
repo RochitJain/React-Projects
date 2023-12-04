@@ -20,8 +20,9 @@ exports.tokenVerify = async function (token,_id) {
 }
 
 exports.auth = async function (req, res, next) {
-    try{const tokenString = req.headers['authorization'].split(' ')[1];
-    // console.log(tokenString);
+    try{
+    const tokenString = req.headers['authorization'].split(' ')[1];
+    
 
     const isMatching = jwt.verify(tokenString,process.env.SECRET_KEY);
     req.user = isMatching._id;
